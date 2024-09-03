@@ -2,27 +2,27 @@
 
 import sys
 
-# grid of Matrix A
+# Grid dimensions for Matrix A
 matrix_a_rows = 2
 matrix_a_cols = 2
 
-# grid of Matrix B
+# Grid dimensions for Matrix B
 matrix_b_rows = 2
 matrix_b_cols = 2
 
 row_index = 0
 for line in sys.stdin:
-    elements = map(int, line.split())
+    elements = list(map(int, line.split()))
 
-    # If processing matrix A (first matrix_a_rows lines)
+    # If processing Matrix A (first matrix_a_rows lines)
     if row_index < matrix_a_rows:
         for j in range(len(elements)):
             for k in range(matrix_b_cols):
-                print(f"{row_index}\t{j}\t{k}\t{elements[j]}")
-    # If processing matrix B (remaining lines)
+                print("{0}\t{1}\t{2}\t{3}".format(row_index, j, k, elements[j]))
+    # If processing Matrix B (remaining lines)
     else:
         for k in range(len(elements)):
             for i in range(matrix_a_rows):
-                print(f"{k}\t{i}\t{row_index - matrix_a_rows}\t{elements[k]}")
-    
+                print("{0}\t{1}\t{2}\t{3}".format(k, i, row_index - matrix_a_rows, elements[k]))
+
     row_index += 1
