@@ -2,30 +2,28 @@
 
 import sys
 
-# grid of Matrix A
-matrix_a_rows = 2
-matrix_a_cols = 2
+current_key = None
+current_value = 0
+key = None
 
-# grid of Matrix B
-matrix_b_rows = 2
-matrix_b_cols = 2
+for line in sys.stdin:
+    if line.strip():  # Ignore empty lines
+        values = line.split('\t')
+        
+        if len(values) != 4:
+            continue  # Skip improperly formatted lines
+        
+        key = tuple(map(int, values[:-1]))
+        value = int(values[-1])
+        
+        if key == current_key:
+            current_value += value
+        else:
+            if current_key:
+                print(f"{current_key[0]}\t{current_key[1]}\t{current_key[2]}\t{current_value}")
+            current_value = value
+            current_key = key
 
-# Initialize result matrix
-result_matrix = []
-
-for row in range(matrix_a_rows):
-    result_row = []
-    for col in range(matrix_b_cols):
-        sum_product = 0
-        for element in range(matrix_a_cols):
-            product = 1
-            for num in range(2):
-                line = sys.stdin.readline()
-                value = map(int, line.split('\t'))[-1]
-                product *= value
-            sum_product += product
-        result_row.append(sum_product)
-    result_matrix.append(result_row)
-
-# Print result matrix
-print('\n'.join([str(row) for row in result_matrix]))
+# Don't forget to output the last accumulated result
+if current_key:
+    print(f"{current_key[0]}\t{current_key[1]}\t{current_key[2]}\t{current_value}")
