@@ -20,10 +20,10 @@ for line in sys.stdin:
             current_value += value
         else:
             if current_key:
-                print(f"{current_key[0]}\t{current_key[1]}\t{current_key[2]}\t{current_value}")
+                print("{0}\t{1}\t{2}\t{3}".format(current_key[0], current_key[1], current_key[2], current_value))
             current_value = value
             current_key = key
 
 # Don't forget to output the last accumulated result
 if current_key:
-    print(f"{current_key[0]}\t{current_key[1]}\t{current_key[2]}\t{current_value}")
+    print("{0}\t{1}\t{2}\t{3}".format(current_key[0], current_key[1], current_key[2], current_value))
